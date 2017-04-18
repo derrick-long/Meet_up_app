@@ -1,1 +1,7 @@
-<h1>Meetups</h1>
+<p><a href="/meetups/new"> Add a New Meetup!</a></p>
+<h2>Meetups</h2>
+  <ul>
+    <% @ordered_meetups.each do |meetup| %>
+      <li> <a href="meetups/<%= meetup.id %>"> <%= meetup.meetup_name  %> </a> </li>
+    <% end %>
+  </ul>
