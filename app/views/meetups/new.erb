@@ -10,31 +10,33 @@
         <% end %>
       </ul>
     <% end %>
-  <% if flash[:message] %>
-    <p class="notice"><%= flash[:message] %> </p>
-   <% else %>
+
+
+
+<% if  session[:user_id] != nil %>
+  <p class="notice"><%= flash[:notice] %> </p>
   <h1> Add a New Meetup! </h1>
-  <form action ="/meetups" method ="post">
-    <div>
-      <label for="meetup_name"> Meetup Name: </label>
-      <input type="text" id="meetup_name" name="meetup[meetup_name]" value="<%= @meetup.meetup_name %>">
-    </div>
+    <form action ="/meetups" method ="post">
+      <div>
+        <label for="meetup_name"> Meetup Name: </label>
+        <input type="text" id="meetup_name" name="meetup[meetup_name]" value="<%= @meetup.meetup_name %>">
+      </div>
 
-    <div>
-      <label for="meetup_location"> Meetup Location: </label>
-      <input type="text" id="meetup_location" name="meetup[location]" value="<%= @meetup.location %>">
-    </div>
+      <div>
+        <label for="meetup_location"> Meetup Location: </label>
+        <input type="text" id="meetup_location" name="meetup[location]" value="<%= @meetup.location %>">
+      </div>
 
-    <div>
-      <label for="meetup_location"> Meetup Description: </label>
-      <input type="text" id="meetup_description" name="meetup[description]" value="<%= @meetup.description %>">
-    </div>
+      <div>
+        <label for="meetup_location"> Meetup Description: </label>
+        <input type="text" id="meetup_description" name="meetup[description]" value="<%= @meetup.description %>">
+      </div>
 
-    <div>
-      <label for="meetup_creator"> Meetup Creator: </label>
-      <input type="text" id="meetup_creator" name ="meetup[meetup_creator]" value="<%= @meetup.meetup_creator %>">
-    <div class ="button">
-    <input type="submit" value = "Create Meetup">
-    </div>
-  </form>
+      <div>
+        <label for="meetup_creator"> Meetup Creator: </label>
+        <input type="text" id="meetup_creator" name ="meetup[meetup_creator]" value="<%= @meetup.meetup_creator %>">
+      <div class ="button">
+      <input type="submit" value = "Create Meetup">
+      </div>
+    </form>
 <% end %>

@@ -45,11 +45,7 @@ get '/meetups' do
 end
 
 get '/meetups/new' do
-  #okay we fucked something up. Should get a flash message and no rendering of the form unless we're signed in
-  if session[:user_id].nil?
-    flash[:message] = "Please sign in to add a new meetup!"
-    erb :'meetups/new'
-  end
+  flash[:notice] = "Please sign in to add a new meetup!"
   @meetup = Meetup.new
   erb :'meetups/new'
 end
@@ -70,28 +66,24 @@ end
 
 
 
-#maybe make a totally seperate page to do it? Weird fucking problem bro god damn shit ass b
 post '/meetups/:id' do
-#   #params aint got no fucking meetup id stored when we get here so there's your problem
-#   binding.pry
   @meetup_record = MeetupRecord.new(params[:meetuprecord])
   if @meetup_record.save
     flash[:notice] = "Successfully joined meetup!"
     redirect '/meetups'
   end
-#   # @users = @meetup.users
-#   # @current_user = User.find(session[:user_id])
-#   # @current_meetup = @meetup
-#   #link is broken
-#   #almost there still fucking it up
+
 end
 
 get '/meetups/:id' do
-
   @meetup = Meetup.find(params[:id])
   @users = @meetup.users
-  @current_user = User.find(session[:user_id])
-  @current_meetup = @meetup
-  #probably need to add some way to add members to a meetup on this page and my index
+  if session[:user_id].nil?
+    #look up why I have to refresh here
+    flash[:notice] = "Please sign in to join a meetup!"
+  else
+    @current_user = User.find(session[:user_id])
+    @current_meetup = @meetup
+  end
   erb :'meetups/show'
 end
