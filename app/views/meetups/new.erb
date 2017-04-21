@@ -1,42 +1,41 @@
 
-
-
-
-  <% if flash[:error] %>
-    <h3> Please, correct the following and re-submit: </h3>
-      <ul>
-        <% flash[:error].each do |error| %>
-        <li class ="error message"><%= error + "." %></li>
+  <body>
+      <% if flash[:error] %>
+        <h3> Please, correct the following and re-submit: </h3>
+        <ul>
+          <% flash[:error].each do |error| %>
+            <li class ="error message"><%= error + "." %></li>
+          <% end %>
+        </ul>
         <% end %>
-      </ul>
+
+    <% if  session[:user_id] != nil %>
+      <p class="notice"><%= flash[:notice] %> </p>
+        <h1> Add a New Meetup! </h1>
+          <form action ="/meetups" id="new_meetup_form" method ="post">
+            <div>
+              <label for="meetup_name"> Meetup Name: </label>
+              <input type="text"  name="meetup[meetup_name]" value="<%= @meetup.meetup_name %>">
+            </div>
+
+            <div>
+              <label for="meetup_location"> Meetup Location: </label>
+              <input type="text" name="meetup[location]" value="<%= @meetup.location %>">
+            </div>
+
+            <div>
+              <label for="meetup_description"> Meetup Description: </label>
+              <input type="text" name="meetup[description]" value="<%= @meetup.description %>">
+            </div>
+
+            <div>
+              <label for="meetup_creator"> Meetup Creator: </label>
+              <input type="text"  name ="meetup[meetup_creator]" value="<%= @meetup.meetup_creator %>">
+            </div>
+
+            <div class ="button">
+            <input type="submit" id="new_meetup" value = "Create Meetup">
+            </div>
+          </form>
     <% end %>
-
-
-
-<% if  session[:user_id] != nil %>
-  <p class="notice"><%= flash[:notice] %> </p>
-  <h1> Add a New Meetup! </h1>
-    <form action ="/meetups" method ="post">
-      <div>
-        <label for="meetup_name"> Meetup Name: </label>
-        <input type="text" id="meetup_name" name="meetup[meetup_name]" value="<%= @meetup.meetup_name %>">
-      </div>
-
-      <div>
-        <label for="meetup_location"> Meetup Location: </label>
-        <input type="text" id="meetup_location" name="meetup[location]" value="<%= @meetup.location %>">
-      </div>
-
-      <div>
-        <label for="meetup_location"> Meetup Description: </label>
-        <input type="text" id="meetup_description" name="meetup[description]" value="<%= @meetup.description %>">
-      </div>
-
-      <div>
-        <label for="meetup_creator"> Meetup Creator: </label>
-        <input type="text" id="meetup_creator" name ="meetup[meetup_creator]" value="<%= @meetup.meetup_creator %>">
-      <div class ="button">
-      <input type="submit" value = "Create Meetup">
-      </div>
-    </form>
-<% end %>
+  </body>

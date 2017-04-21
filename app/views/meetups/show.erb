@@ -1,24 +1,15 @@
-
-
-There should be a button to join the meetup if not signed in or if you're signed in and
-not a member of the meetup needs to be made
-If not signed in there should be a message that says you must sign in
-clean up and possibly make an ajax request?
-add sign in notice here as well
-<div class= "meetup_info">
-  <h1>  <%= @meetup.meetup_name %> Info </h1>
-
+  <div class= "meetup_info">
+    <h1>  <%= @meetup.meetup_name %> Info </h1>
       <div> Description:  <%= @meetup.description %>   </div>
       <div> Location: <%= @meetup.location %> </div>
       <div> Meetup Host: <%= @meetup.meetup_creator %> </div>
       <% unless @users.nil? %>
-        <% @users.each do |user| %>
-          <div> <%= user.username %>  </div>
-          <div> <%= user.avatar_url %> </div>
-        <% end %>
+          <% @users.each do |user| %>
+            <div> <%= user.username %>  </div>
+            <div> <%= user.avatar_url %> </div>
+          <% end %>
       <% end %>
-</div>
-  <% if session[:user_id] != nil %>
+  </div>
 <form action = "/meetups/:id" method = "post">
 
   <input name="meetuprecord[meetup_id]" id="current_meetup" value="<%= @current_meetup.id %>" type="hidden"> </input>
@@ -26,4 +17,3 @@ add sign in notice here as well
 
   <input type="submit" value="Join Meetup">
 </form>
-  <% end %>

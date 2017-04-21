@@ -51,14 +51,15 @@ get '/meetups/new' do
 end
 
 post '/meetups' do
+
   @meetup = Meetup.new(params[:meetup])
   if @meetup.save
-  flash[:notice] = "New meetup added!"
-  redirect '/meetups'
-  else
+    flash[:notice] = "New meetup added!"
+else
     flash[:error] = @meetup.errors.full_messages
     #need to submit form with ajax request
     redirect '/meetups/new'
+
   end
   erb :'meetups/new'
 end
@@ -79,8 +80,8 @@ get '/meetups/:id' do
   @meetup = Meetup.find(params[:id])
   @users = @meetup.users
   if session[:user_id].nil?
-    #look up why I have to refresh here
-    flash[:notice] = "Please sign in to join a meetup!"
+    flash[:notice] = "Please sign in to view meetup details!"
+    redirect '/'
   else
     @current_user = User.find(session[:user_id])
     @current_meetup = @meetup
