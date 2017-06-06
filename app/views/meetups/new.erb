@@ -9,8 +9,7 @@
         </ul>
         <% end %>
 
-    <% if  session[:user_id] != nil %>
-      <p class="notice"><%= flash[:notice] %> </p>
+
         <h1> Add a New Meetup! </h1>
           <form action ="/meetups" id="new_meetup_form" method ="post">
             <div>
@@ -33,9 +32,9 @@
               <input type="text"  name ="meetup[meetup_creator]" value="<%= @meetup.meetup_creator %>">
             </div>
 
-            <div class ="button">
+            <div class ="button" id= "meetup_button">
             <input type="submit" id="new_meetup" value = "Create Meetup">
             </div>
           </form>
-    <% end %>
+    
   </body>
